@@ -48,7 +48,7 @@ class ScrollController {
 		event.propagate = false;
 		switch (event.kind) {
 			case ERelease, EReleaseOutside, EFocusLost, EOut:
-				scene.stopDrag();
+				scene.stopCapture();
 			case EMove:
 				scrollText.y += event.relY - dragScrollingLastPosition;
 				dragScrollingLastPosition = event.relY;
@@ -73,7 +73,7 @@ class ScrollController {
 			case EPush:
 				if (event.relY > topMargin && event.relY < (scene.height - bottomMargin)) {
 					dragScrollingLastPosition = event.relY;
-					scene.startDrag(dragScroll);
+					scene.startCapture(dragScroll);
 				}
 			default:
 		}
