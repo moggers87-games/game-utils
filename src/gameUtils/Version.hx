@@ -1,6 +1,7 @@
 package gameUtils;
 
 class Version {
+
 	macro public static function getVersion():haxe.macro.Expr.ExprOf<String> {
 		var version:String;
 		var versionFile = ".version";

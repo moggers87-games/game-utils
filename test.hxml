@@ -1,4 +1,4 @@
 --library utest
 --class-path src
 --class-path test
---main test.Main
+--main Main
