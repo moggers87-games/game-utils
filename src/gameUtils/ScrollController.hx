@@ -1,7 +1,7 @@
 package gameUtils;
 
 enum abstract TextScrollerNumbers(Int) from Int to Int {
-	var scrollMultiplier = 200;
+	var scrollMultiplier = 100;
 }
 
 class ScrollController {
@@ -17,16 +17,24 @@ class ScrollController {
 
 	var yScrollMax:Float;
 	var yScrollMin:Float;
+	var scrollMultiplier:Int;
 
 	public var moveUpKeys:Array<Int>;
 	public var moveDownKeys:Array<Int>;
 
 	public function new(scrollText:h2d.Text, scene:h2d.Scene,
-			topMargin:Float, rightMargin:Float, bottomMargin:Float, leftMargin:Float) {
+			topMargin:Float, rightMargin:Float, bottomMargin:Float, leftMargin:Float,
+			?scrollMultiplier:Int) {
 		scrollText.x = leftMargin;
 		scrollText.maxWidth = scene.width - leftMargin - rightMargin;
 		yScrollMin = scene.height - bottomMargin - scrollText.textHeight;
 		yScrollMax = scrollText.y = topMargin;
+		if (scrollMultiplier == null) {
+			this.scrollMultiplier = TextScrollerNumbers.scrollMultiplier;
+		}
+		else {
+			this.scrollMultiplier = scrollMultiplier;
+		}
 
 		this.scrollText = scrollText;
 		this.scene = scene;
@@ -60,7 +68,7 @@ class ScrollController {
 	function scrollMe(event:hxd.Event) {
 		switch (event.kind) {
 			case EWheel:
-				scrollText.y += (event.wheelDelta * TextScrollerNumbers.scrollMultiplier);
+				scrollText.y -= (event.wheelDelta * scrollMultiplier);
 				limitScrollY();
 			case EKeyDown:
 				if (moveUpKeys.contains(event.keyCode)) {
