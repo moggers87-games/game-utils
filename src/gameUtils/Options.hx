@@ -24,7 +24,7 @@ class Options {
 			savePath = haxe.io.Path.join([saveDir, savePath]);
 		}
 		catch (e) {
-			Sys.stderr().writeString("Couldn't create config directory, saving data to current working directory instead");
+			Sys.stderr().writeString("Couldn't create config directory, saving data to current working directory instead\n");
 		}
 		#end
 	}
@@ -36,7 +36,7 @@ class Options {
 			serialised = sys.io.File.getContent(savePath);
 		}
 		catch (e) {
-			Sys.stderr().writeString("Couldn't find config dir");
+			Sys.stderr().writeString("Couldn't find config dir\n");
 			serialised = "{}";
 		}
 		#elseif js
